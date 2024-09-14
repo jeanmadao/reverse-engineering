@@ -40,8 +40,11 @@ class Register:
     def inc(self):
         self.add(1)
 
+    # def add_lsb(self, bits, value):
+    #     self.mov_lsb(bits, self.get_lsb(bits) + value)
+
     def add_lsb(self, bits, value):
-        self.mov_lsb(bits, self.get_lsb(bits) + value)
+        self.mov_lsb(bits, (self.get_lsb(bits) + value) % 2**8)
 
     def sub(self, other):
         self.value = self.__sub__(other)

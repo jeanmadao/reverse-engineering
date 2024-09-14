@@ -20,8 +20,8 @@ while ebx.get_value():
     eax.inc()
     ebx.dec()
 
-print(hex(ecx.get_value()))
-print(ebx.get_value())
+# print(hex(ecx.get_value()))
+# print(ebx.get_value())
 
 edx.mov(ecx)
 ecx.mov(0x19)
@@ -30,12 +30,10 @@ eax_content = b'\x1e\xcd\x2a\xd5\x34\x87\xfc\x78\x64\x35\x9d\xec\xde\x15\xac\x97
 
 res = bytearray()
 while ecx.get_value():
-    # print(hex(eax_content[ecx.get_value() - 1]))
     edx.ror(1)
     eax.mov_lsb(8, eax_content[ecx.get_value() - 1])
 
     res.append(eax.get_lsb(8) ^ edx.get_lsb(8))
-    print(chr(eax.get_lsb(8) ^ edx.get_lsb(8)),end="")
 
     ecx.dec()
-# print(res)
+print(res[::-1].decode("utf-8"))
